@@ -34,6 +34,6 @@
         "default_popup": "ssPopup.html"
     },
 	"homepage_url": "https://www.xiniu.com",
-	"permissions": [ "activeTab", "storage", "unlimitedStorage", "<all_urls>" ],
+	"permissions": [ "activeTab", "storage", "unlimitedStorage", "<all_urls>", "downloads" ],
 	"omnibox": { "keyword" : "xiniu" }
 }

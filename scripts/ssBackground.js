@@ -1,6 +1,7 @@
 
 var currentTab, // result of chrome.tabs.query of current active tab
     resultWindowId; // window id for putting resulting images
+	currentDownloadId = 0;
 
 // 当用户接收关键字建议时触发
 chrome.omnibox.onInputEntered.addListener((text) => {
@@ -109,19 +110,42 @@ function splitFilename(url){
 }
 function downloadFile(src, filename) {
 	console.log('download:' + src);
-	// 创建隐藏的可下载链接
-	var eleLink = document.createElement('a');
-	eleLink.download = filename;
-	eleLink.style.display = 'none';
-	// // 字符内容转变成blob地址
-	eleLink.href = src;
-	// // 触发点击
-	document.body.appendChild(eleLink);
-	eleLink.click();
-	// // 然后移除
-	document.body.removeChild(eleLink);
+	// // 创建隐藏的可下载链接
+	// var eleLink = document.createElement('a');
+	// eleLink.download = filename;
+	// eleLink.style.display = 'none';
+	// // // 字符内容转变成blob地址
+	// eleLink.href = src;
+	// // // 触发点击
+	// document.body.appendChild(eleLink);
+	// eleLink.click();
+	// // // 然后移除
+	// document.body.removeChild(eleLink);
+	
+	chrome.downloads.download({'url': src, 'filename': filename}, function(downloadId){console.log('downloadId:' + downloadId); downloadStatus(downloadId);});
 	console.log('download end...');
+	
 };
+function downloadStatus(downloadId){
+	currentDownloadId = downloadId;
+	chrome.downloads.onChanged.addListener(downloadCallback);
+}
+// 监视下载的回调
+function downloadCallback(downloadDelta){
+	if(downloadDelta.id == currentDownloadId){
+		console.log('downloadCallback:' + JSON.stringify(downloadDelta));
+		switch(downloadDelta.state.current){
+			case 'complete': downloadComplete(); break;
+			case 'in_progress': downloadProgress(); break;
+		}
+	}
+}
+function downloadComplete(){
+	console.log('downloadComplete downloadId:' + currentDownloadId);
+}
+function downloadProgress(){
+	console.log('downloadProgress downloadId:' + currentDownloadId);
+}
 
 function getAllScreen()
 {
