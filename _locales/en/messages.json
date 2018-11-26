@@ -1,0 +1,18 @@
+{
+   "name":{"message":"xiniu"},
+   "description":{"message":"A plugin for xiniu cloud"},
+   "title":{"message":"xiniu plugin"},
+   
+   "action_capture_entire_lite": {
+      "description": "",
+      "message": "Capture entire page"
+   },
+   "action_capture_selection_lite": {
+      "description": "",
+      "message": "Capture selection"
+   },
+   "action_capture_visible_lite": {
+      "description": "",
+      "message": "Capture visible part"
+   }
+}

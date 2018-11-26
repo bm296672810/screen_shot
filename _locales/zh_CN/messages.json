@@ -1,0 +1,18 @@
+{
+   "name":{"message":"犀牛"},
+   "description":{"message":"专为犀牛云写的插件"},
+   "title":{"message":"犀牛云插件"},
+   
+   "action_capture_entire_lite": {
+      "description": "",
+      "message": "捕捉整个页面"
+   },
+   "action_capture_selection_lite": {
+      "description": "",
+      "message": "捕捉选定区域"
+   },
+   "action_capture_visible_lite": {
+      "description": "",
+      "message": "捕捉可见部分"
+   }
+}
